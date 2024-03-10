@@ -230,33 +230,8 @@ def get_support_fighters(tag: str, selected: list) -> list:
 st.header("Time for Random!")
 
 # Show the most recent character (show how updated site is)
-st.write("MOST RECENT CHARACTER")
-# Open and resize the image to the proper dimensions
+st.write("MOST RECENT CHARACTER: " + str(fighters[-1]))
 
-dimensions = (100, 100)
-
-image = Image.open(fighters[-1].img)
-new_image = image.resize(dimensions)
-
-colim = Image.open(fighters[-1].color.lower() + ".png")
-newcol = colim.resize(dimensions)
-
-# Get the rarity picture
-rar = Image.open(fighters[-1].rarity.lower() +
-                 ".png").resize(dimensions)
-
-final_im = Image.alpha_composite(new_image, rar)
-
-# Add the sparking image for LL's
-if fighters[-1].rarity == "LL":
-    # Open the sparking image
-    temp = Image.open("sparking.png")
-    # Apply the sparking image on the LL
-    final_im = Image.alpha_composite(final_im,temp)
-
-final_im = Image.alpha_composite(final_im, newcol)
-
-st.image(final_im)
 
 
 
@@ -393,7 +368,10 @@ selected_fighters = selected_fighters[0:6]
 ##### ADVANCED MODE #####
 
 adv_mode = st.toggle("Advanced Mode")
-
+epis_only = st.toggle("Episodes Only (For Advanced Mode. NOTE: This is "
+                      "irrelevant when guaranteed character is used)")
+tags_only = st.toggle("Tags Only (For Advanced Mode. NOTE: This is "
+                      "irrelevant when guaranteed character is used)")
 
 # Make the Button for a random fighter
 randfighter = st.button("Click for a random team")
@@ -428,10 +406,18 @@ if randfighter:
         # If guaranteed fighter is not used
         if len(selected_fighters) == 0:
             # Put episodes and tags into one list
-            relevant_info = char_tags.copy()
-            relevant_info.extend(char_epi)
+            relevant_info = []
 
-            rand_num = random.randint(0, len(relevant_info))
+            if not tags_only:
+                relevant_info.extend(selected_epi)
+            if not epis_only:
+                relevant_info.extend(selected_tags)
+
+            if epis_only and tags_only:
+                relevant_info.extend(selected_epi)
+                relevant_info.extend(selected_tags)
+
+            rand_num = random.randint(0, len(relevant_info) - 1)
             tag = relevant_info[rand_num]
 
         # If guaranteed fighter is used
