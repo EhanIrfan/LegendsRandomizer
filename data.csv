@@ -8,7 +8,7 @@ Hero,Jaco,Red,.,Red,Frieza Resurrected Saga (S),01-15H
 Hero,2nd Form Frieza,Red,Frieza Force.Lineage of Evil.Powerful Opponent.Transforming Warrior,Red,Frieza Saga (Z),01-42H
 Hero,Dodoria,Red,Frieza Force,Red,Frieza Saga (Z),01-26H
 Hero,Mercenary Tao,Yellow,DB,Hero,Dragon Ball Saga,24-12H
-Hero,Nappa,Yellow,Frieza Force,All,Saiyan.Saiyan Saga (Z),01-20H
+Hero,Nappa,Yellow,Frieza Force,All,Saiyan Saga (Z),01-20H
 Hero,Goku,Yellow,Saiyan.Son Family,Saiyan,Saiyan Saga (Z),01-01H
 Hero,Master Roshi,Yellow,DB,Yellow,Dragon Ball Saga,04-14H
 Hero,Final Form Frost,Yellow,Universe 6.Transforming Warrior.Lineage of Evil.Rival Universe.Universe Rep,Yellow,God of Destruction Champa Saga (S),01-47H
@@ -550,7 +550,7 @@ Ultra,Super Saiyan God SS Kaioken Goku,Yellow,Son Family.Saiyan.God Ki.Super.Sai
 Ultra,Legendary Super Saiyan Broly,Purple,Saiyan.Super Saiyan.Powerful Opponent,Movies.Powerful Opponent ,Movies,51-03U
 Ultra,Super Saiyan God SS Gogeta,Purple,Saiyan.Fusion.Fusion Warrior.God Ki.Super Saiyan God SS,Fusion Warrior.Saiyan,Movies,54-05U
 Ultra,Vegeta,Purple,Saiyan.Vegeta Clan.Event Exclusive,Frieza Saga (Z).Saiyan,Frieza Saga (Z),-EVT-24U
-Ultra,Super Saiyan Rose Goku Black,Green,Saiyan.Future.God Ki.Super Saiyan Rose. Powerful Oppenent,Future.Powerful Opponent,Future Trunks Saga (S),57-01U
+Ultra,Super Saiyan Rose Goku Black,Green,Saiyan.Future.God Ki.Super Saiyan Rose.Powerful Oppenent,Future.Powerful Opponent,Future Trunks Saga (S),57-01U
 Ultra,Super Janemba,Blue,Transforming.Regeneration.Powerful Opponent,Regeneration.Movies,Movies,64-01U
 Ultra,Super Gogeta,Blue,Saiyan.Super Saiyan.Otherworld Warrior.Fusion Warrior.Fusion,Fusion Warrior.Saiyan,Movies,42-01U
 LL,Super #17,Red,GT.Android.Merging.Fusion Warrior.Powerful Opponent,GT.Android.Powerful Opponent,Super #17 Saga (GT),67-05S
@@ -560,3 +560,5 @@ LL,Super Vegeta,Red,Saiyan.Super Saiyan.Vegeta Clan,Cell Saga (Z).Vegeta Clan.Sa
 Sparking,1st Form Cell,Yellow,Android.Powerful Opponent.Regeneration.Absorption.Event Exclusive.Future,Powerful Opponent.Event Exclusive.Cell Saga (Z),Cell Saga (Z),-EVT-79S
 Ultra,Super Saiyan 2 Gohan (Youth),Green,Hybrid Saiyan.Son Family.Super Saiyan 2,Hybrid Saiyan.Son Family,Cell Saga (Z),68-03U
 Sparking,Broly: Fury,Blue,Event Exclusive.Saiyan.Frieza Force.Powerful Opponent,Powerful Opponent.Event Exclusive,Movies,-EVT-80S
+Sparking,Trunks (Parasitism) Baby,Green,GT.Merging.Transforming Warrior.Regeneration.Hybrid Saiyan.Powerful Opponent,GT.Powerful Opponent.Regeneratiion,Super Baby Saga (GT),69-02S
+LL,Super Baby 2,Yellow,GT.Merging.Transforming Warrior.Regeneration.Saiyan.Powerful Opponent,GT.Powerful Opponent.Regeneratiion,Super Baby Saga (GT),69-01S

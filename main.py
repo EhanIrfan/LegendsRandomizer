@@ -1,11 +1,24 @@
 from typing import Optional
 
+
+
 from test import Fighter
 import streamlit as st
 import random
 from PIL import Image
+from streamlit.components.v1 import components
+
+
+
 # Title of page and size
 st.set_page_config(page_title="Legends Randomizer", layout="wide")
+
+# HTML CODE FOR ADS
+HtmlFile = open("test.html", 'r', encoding='utf-8')
+source_code = HtmlFile.read()
+print(source_code)
+st.components.v1.html(source_code, height=600)
+
 
 info = st.expander("INFO")
 info.write("Just like the game, if no tags are selected, they are all selected."
@@ -20,8 +33,9 @@ info.write(" With "
 info.write("If advanced mode is active, only the first character "
            "of guaranteed select will be used and the team will be built "
            "around a random tag of theirs, if possible.")
-info.write("NOTE: Some of the new characters do not have their pictures so "
-           "filler pictures are instead used. Read the DBL tags to be safe.")
+info.write("Use the unwanted fighter code to save your settings for which "
+           "fighters you don't want on your team by copying and pasting the "
+           "code when you need to.")
 
 
 cred_url = "https://legends.dbz.space/characters/"
@@ -105,6 +119,20 @@ def get_fighter_by_name(name: str) -> Fighter:
             return fighter
 
 
+def get_fighter_index(fighter: Fighter) -> int:
+    """
+    Given a fighter, return their position in the dataset (as an index)
+
+    Precondition: <fighter> is in the dataset
+    """
+
+    count = 0
+
+    for f in fighters:
+        if fighter == f:
+            return count
+        count += 1
+
 def sort_tags(fighters: list, tags: list, rarites: list, colors: list, epi: list) -> list:
     """
     Return a list of fighters that contain atleast one of the <tags>
@@ -142,7 +170,7 @@ def get_strong_fighters(tag: str, f: Optional[Fighter]) -> list:
     else:
         tags = [tag]
 
-    relevant_fighters = sort_tags(fighters,tags, char_rar, char_col, epi)
+    relevant_fighters = sort_tags(wanted_fighters,tags, char_rar, char_col, epi)
 
     # Shuffle the list
     random.shuffle(relevant_fighters)
@@ -202,7 +230,7 @@ def get_support_fighters(tag: str, selected: list) -> list:
     big_list = []
 
     # Shuffle the fighters
-    rand_fighters = fighters.copy()
+    rand_fighters = wanted_fighters.copy()
     random.shuffle(rand_fighters)
     for fighter in rand_fighters:
         if tag in fighter.ztags and fighter not in selected:
@@ -227,7 +255,7 @@ def get_support_fighters(tag: str, selected: list) -> list:
             return big_list
 
 
-st.header("Time for Random!")
+st.header("Randomization Time!")
 
 # Show the most recent character (show how updated site is)
 st.write("MOST RECENT CHARACTER: " + str(fighters[-1]))
@@ -249,7 +277,7 @@ char_tags = ["Saiyan", "Hybrid Saiyan", "Super Saiyan", "Super Saiyan 2",
              "Absorption", "Fusion", "Potara", "Rival Universe",
              "Universe 2", "Universe 4", "Universe 6", "Universe 9",
              "Universe 11", "Universe Rep", "DB", "Event Exclusive",
-             "Legends Road", "Game Originals", "test"]
+             "Legends Road", "Game Originals"]
 
 char_epi = ["Dragon Ball Saga", "Saiyan Saga (Z)", "Frieza Saga (Z)",
             "Android Saga (Z)", "Cell Saga (Z)", "Majin Buu Saga (Z)",
@@ -342,7 +370,6 @@ selected_chars = []
 selected_fighters = []
 
 fighter_nams = []
-
 # Display the choices of guaranteed fighters
 
 for fighter in fighters:
@@ -364,13 +391,49 @@ selected_fighters = selected_fighters[0:6]
 
 
 
+### OMIT CHARACTER SELECT ###
+container6 = st.container()
+omitted_chars_check = container6.multiselect("Select the characters that you "
+                                             "DON'T want on your team!",
+                                             fighter_nams,
+                                            placeholder="Select Character(s)")
+
+omitted_chars = []
+omitted_chars.extend(omitted_chars_check)
+wanted_fighters = fighters.copy()
+
+
+omit = ""
+for fighter in fighters:
+    if fighter in omitted_chars:
+        omit += "0"
+    else:
+        omit += "1"
+
+
+enter_code = st.toggle("Show Unwanted Fighter Code (For Copying and Pasting)")
+
+if enter_code:
+    omit = st.text_input("Enter Code Here", omit)
+
+# Remove the omitted characters from the randomization
+if len(omit) == len(fighters) and (omit.count("0") + omit.count("1") == len(fighters)):
+    for i, char in enumerate(omit):
+        if char == "0":
+            wanted_fighters.pop(i - (len(fighters) - len(wanted_fighters)))
+
+
+
+
+
 
 ##### ADVANCED MODE #####
 
 adv_mode = st.toggle("Advanced Mode")
-epis_only = st.toggle("Episodes Only (For Advanced Mode. NOTE: This is "
+if adv_mode:
+    epis_only = st.toggle("Episodes Only (NOTE: This is "
                       "irrelevant when guaranteed character is used)")
-tags_only = st.toggle("Tags Only (For Advanced Mode. NOTE: This is "
+    tags_only = st.toggle("Tags Only (NOTE: This is "
                       "irrelevant when guaranteed character is used)")
 
 # Make the Button for a random fighter
@@ -455,7 +518,7 @@ if randfighter:
 
     else:
         # Create a list of fighters that follow the rules
-        temp_fighters = sort_tags(fighters.copy(), selected_tags, selected_rar,
+        temp_fighters = sort_tags(wanted_fighters, selected_tags, selected_rar,
                                   selected_col, selected_epi)
 
         # Check for duplicates between temp_fighters and guaranteed_fighters
