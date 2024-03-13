@@ -37,7 +37,13 @@ class Fighter:
 
     def __str__(self):
         hold = self.name.split(".")
-        return hold[0] + " (" + self.dbl + ")"
+        rar = self.rarity
+        if rar == "Ul":
+            rar = "Ultra"
+        elif rar == "LL":
+            rar = "Legends Limited"
+
+        return self.color + " " + rar + " " + hold[0] + " (" + self.dbl + ")"
 
 
     def __eq__(self, other):
