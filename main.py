@@ -1,23 +1,14 @@
 from typing import Optional
 
 
-
 from test import Fighter
 import streamlit as st
 import random
 from PIL import Image
-from streamlit.components.v1 import components
-
 
 
 # Title of page and size
 st.set_page_config(page_title="Legends Randomizer", layout="wide")
-
-# HTML CODE FOR ADS
-HtmlFile = open("test.html", 'r', encoding='utf-8')
-source_code = HtmlFile.read()
-print(source_code)
-st.components.v1.html(source_code, height=600)
 
 
 info = st.expander("INFO")
